@@ -2,850 +2,833 @@
 <html lang="it">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP Metalli | Carpenteria Metallica & Lavorazioni in Ferro a Galliate</title>
+    <meta name="description" content="LP Metalli di Salvatore La Porta a Galliate (NO): carpenteria metallica di precisione, cancelli, inferriate, strutture in ferro e lavorazioni su misura.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.lpmetalli.it/">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <!-- Open Graph / SEO Social -->
+    <meta property="og:title" content="LP Metalli | Carpenteria Metallica a Galliate">
+    <meta property="og:description" content="Lavorazioni metalliche artigianali, carpenteria in ferro e strutture su misura a Galliate e provincia di Novara.">
+    <meta property="og:type" content="website">
 
-    <title>LP Metalli | Carpenteria metallica</title>
-
-    <meta
-        name="description"
-        content="LP Metalli. Carpenteria metallica, saldatura, cancelli, inferriate e lavorazioni in metallo."
-    >
-
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <!-- Leaflet JS & CSS per Mappa Interattiva -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ed5928',
+                            orangeHover: '#d4491c',
+                            black: '#0d0e0f',
+                            dark: '#141517',
+                            card: '#1c1d20',
+                            border: '#2a2c30',
+                            grey: '#8f8f8c',
+                            lightGrey: '#c9c9c5',
+                            white: '#f3f2ee',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Barlow Condensed"', 'sans-serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-    <link
-        rel="stylesheet"
-        href="css/stile.css"
-    >
+    <style>
+        :root {
+            --brand-orange: #ed5928;
+            --brand-black: #0d0e0f;
+            --brand-white: #f3f2ee;
+        }
 
+        html {
+            scroll-behavior: smooth;
+            color-scheme: dark;
+        }
+
+        body {
+            background-color: var(--brand-black);
+            color: var(--brand-white);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Accento Sfondo: Griglia di righe architettoniche/strutturali */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Linee Guida di Accento Sfondo */
+        .bg-lines-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            opacity: 0.25;
+        }
+
+        .bg-lines-overlay div {
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(237, 89, 40, 0.2) 20%, rgba(255, 255, 255, 0.05) 80%, transparent);
+        }
+
+        /* Glassmorphism Header */
+        .glass-header {
+            background: rgba(13, 14, 15, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0e0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2c30;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--brand-orange);
+        }
+
+        /* Hide scrollbar for carousel controls */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Animations & Reveal Effects */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Dark Filter per Mappa OpenStreetMap */
+        .dark-map .leaflet-tile-pane {
+            filter: grayscale(100%) invert(90%) contrast(120%) opacity(0.85);
+        }
+
+        /* Outline & Fill Dynamics per la parola WORKS */
+        .text-outline-white {
+            color: transparent;
+            -webkit-text-stroke: 2px #f3f2ee;
+            transition: color 0.15s ease-out;
+        }
+        
+        .text-outline-orange {
+            color: transparent;
+            -webkit-text-stroke: 1.5px #ed5928;
+        }
+    </style>
 </head>
 
+<body class="selection:bg-brand-orange selection:text-white relative min-h-screen bg-grid-pattern">
 
-<body>
+    <!-- RIGHE DI ACCENTO SFONDO ARCHITETTONICO -->
+    <div class="bg-lines-overlay">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
+    <!-- HEADER -->
+    <header id="site-header" class="glass-header fixed top-0 left-0 right-0 z-50 border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
+            <!-- LOGO INGRANDITO -->
+            <a href="#top" class="group flex items-center gap-4">
+                <img src="logo.png" alt="LP Metalli Logo" class="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-2xl sm:text-3xl tracking-wider leading-none text-white">LP <span class="text-brand-orange">METALLI</span></span>
+                    <span class="text-[11px] text-brand-grey font-body uppercase tracking-widest leading-none mt-1">di Salvatore La Porta</span>
+                </div>
+            </a>
 
-<header class="site-header">
+            <!-- DESKTOP NAV -->
+            <nav class="hidden md:flex items-center gap-8 font-display tracking-widest text-xs font-bold uppercase">
+                <a href="#chi-siamo" class="hover:text-brand-orange transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Chi Siamo</a>
+                <a href="#servizi" class="hover:text-brand-orange transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Servizi</a>
+                <a href="#lavori" class="hover:text-brand-orange transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Realizzazioni</a>
+                <a href="#dove-siamo" class="hover:text-brand-orange transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-brand-orange hover:after:w-full after:transition-all">Dove Siamo</a>
+            </nav>
 
-    <a
-        href="#top"
-        class="logo"
-    >
-        LP<span>METALLI</span>
-    </a>
-
-
-    <nav class="main-nav">
-
-        <a href="#dove-siamo">
-            DOVE SIAMO
-        </a>
-
-        <a href="#contatti">
-            CONTATTI
-        </a>
-
-        <a href="#lavora-con-noi">
-            LAVORA CON NOI
-        </a>
-
-    </nav>
-
-</header>
-
-
-<main id="top">
-
-
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
-
-    <section class="hero">
-
-        <div class="hero-image"></div>
-
-        <div class="hero-overlay"></div>
-
-
-        <div class="hero-content">
-
-            <div class="hero-small">
-                CARPENTERIA METALLICA
-            </div>
-
-
-            <h1>
-                METAL
-                <span>WORKS</span>
-            </h1>
-
-
-            <div class="hero-bottom">
-
-                <p>
-                    Lavorazioni metalliche e carpenteria
-                    realizzate direttamente in officina.
-                </p>
-
-
-                <a
-                    href="#lavorazioni"
-                    class="hero-link"
-                >
-                    SCOPRI
-                    <span>↓</span>
+            <!-- CTA HEADER BUTTON -->
+            <div class="hidden md:flex items-center">
+                <a href="#contatti" class="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-3 rounded-sm font-display text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-lg hover:shadow-brand-orange/20">
+                    <span>Richiedi Preventivo</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </a>
-
             </div>
 
+            <!-- MOBILE HAMBURGER BUTTON -->
+            <button id="mobile-menu-btn" aria-label="Apri Menu" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none">
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 transform origin-center" id="bar1"></span>
+                <span class="w-6 h-0.5 bg-white transition-all duration-300" id="bar2"></span>
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 transform origin-center" id="bar3"></span>
+            </button>
         </div>
 
-    </section>
+        <!-- MOBILE DRAWER -->
+        <div id="mobile-drawer" class="fixed inset-x-0 top-28 bg-brand-black/95 backdrop-blur-xl border-b border-white/10 hidden flex-col px-6 py-8 gap-6 md:hidden transition-all duration-300 z-40">
+            <a href="#chi-siamo" class="mobile-nav-link font-display text-xl uppercase tracking-wider font-semibold border-b border-white/5 pb-3">Chi Siamo</a>
+            <a href="#servizi" class="mobile-nav-link font-display text-xl uppercase tracking-wider font-semibold border-b border-white/5 pb-3">Servizi & Lavorazioni</a>
+            <a href="#lavori" class="mobile-nav-link font-display text-xl uppercase tracking-wider font-semibold border-b border-white/5 pb-3">I Nostri Lavori</a>
+            <a href="#dove-siamo" class="mobile-nav-link font-display text-xl uppercase tracking-wider font-semibold border-b border-white/5 pb-3">Dove Siamo</a>
+            <a href="#contatti" class="mobile-nav-link inline-flex items-center justify-center gap-2 bg-brand-orange text-white py-3.5 font-display text-sm font-bold tracking-widest uppercase rounded-sm mt-2">
+                <span>Richiedi Preventivo</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+        </div>
+    </header>
 
+    <!-- MAIN CONTENT -->
+    <main id="top" class="pt-28 relative z-10">
 
+        <!-- HERO SECTION -->
+        <section class="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-20">
+            <!-- Background Image Real -->
+            <div class="absolute inset-0 z-0">
+                <img src="LPMETALLI_HERO.jpg" alt="Officina LP Metalli" class="w-full h-full object-cover opacity-60 scale-105 transform hover:scale-100 transition-transform duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-black/80 via-brand-black/40 to-transparent"></div>
+            </div>
 
-    <!-- =====================================================
-         LAVORAZIONI
-    ===================================================== -->
+            <!-- Content -->
+            <div class="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col justify-between">
+                <div class="max-w-4xl">
+                    <div class="inline-flex items-center gap-3 border border-brand-orange/40 bg-brand-orange/10 px-4 py-1.5 rounded-full mb-6 reveal-element">
+                        <span class="w-2 h-2 rounded-full bg-brand-orange animate-ping"></span>
+                        <span class="font-display tracking-widest text-xs font-bold text-brand-orange uppercase">Carpenteria Metallica di Precisione • Galliate (NO)</span>
+                    </div>
 
-    <section
-        class="lavorazioni-section"
-        id="lavorazioni"
-    >
+                    <!-- TITOLO CON "WORKS" CON SOLO BORDO BIANCO CHE SI RIEMPIE ALLO SCROLL -->
+                    <h1 class="font-display font-black text-6xl sm:text-8xl md:text-9xl tracking-tight leading-none mb-6 uppercase reveal-element text-white drop-shadow-md">
+                        METAL<br>
+                        <span id="hero-works" class="text-outline-white inline-block">WORKS</span>
+                    </h1>
 
+                    <p class="text-brand-white text-lg sm:text-2xl max-w-3xl leading-relaxed mb-10 font-normal reveal-element border-l-2 border-brand-orange pl-5 bg-brand-black/30 backdrop-blur-xs py-2 rounded-r-sm">
+                        Progettiamo, lavoriamo e assembliamo strutture metalliche di alta precisione. Soluzioni civili ed industriali realizzate con cura sartoriale direttamente nella nostra officina.
+                    </p>
 
-        <!-- =================================================
-             FOTO 01
-        ================================================= -->
+                    <div class="flex flex-wrap items-center gap-5 reveal-element">
+                        <a href="#contatti" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-8 py-4 rounded-sm font-display text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-lg shadow-brand-orange/20 flex items-center gap-3 group">
+                            <span>Richiedi un Preventivo</span>
+                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
 
-        <figure class="mosaic-hero">
-
-            <img
-                src="immagini/LPMETALLI_LAVORO-01.jpg"
-                alt="Lavorazione metallica in officina"
-            >
-
-
-            <div class="lavorazioni-overlay">
-
-                <div class="lavorazioni-label">
-                    LAVORAZIONI
+                        <a href="#lavori" class="border border-white/30 bg-brand-black/40 hover:bg-brand-black/70 hover:border-brand-orange text-white hover:text-brand-orange px-8 py-4 rounded-sm font-display text-sm font-bold tracking-widest uppercase transition-all duration-300 flex items-center gap-3">
+                            <span>Guarda Realizzazioni</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Features Footer in Hero -->
+                <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10 reveal-element">
+                    <div>
+                        <div class="font-display font-bold text-2xl md:text-3xl text-white uppercase">100% Su Misura</div>
+                        <div class="text-xs text-brand-grey uppercase tracking-wider mt-1">Progetti Personalizzati</div>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-2xl md:text-3xl text-brand-orange uppercase">Alta Qualità</div>
+                        <div class="text-xs text-brand-grey uppercase tracking-wider mt-1">Acciai Certificati</div>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-2xl md:text-3xl text-white uppercase">Puntualità</div>
+                        <div class="text-xs text-brand-grey uppercase tracking-wider mt-1">Consegna & Posa in Opera</div>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-2xl md:text-3xl text-brand-orange uppercase">Artigianalità</div>
+                        <div class="text-xs text-brand-grey uppercase tracking-wider mt-1">Cura dei Dettagli</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <h2>
+        <!-- CHI SIAMO SECTION -->
+        <section id="chi-siamo" class="py-24 bg-brand-dark/80 backdrop-blur-sm border-y border-brand-border relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 reveal-element">
+                        <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">Esperienza & Passione</span>
+                        <h2 class="font-display font-bold text-4xl sm:text-6xl text-white uppercase tracking-tight mt-1 mb-6">
+                            Esperienza Artigiana & <span class="text-outline-orange">Precisione</span>
+                        </h2>
+                        <p class="text-brand-grey text-base leading-relaxed mb-4">
+                            La <strong class="text-white">LP Metalli di Salvatore La Porta</strong> unisce la passione per la carpenteria metallica tradizionale alle più moderne tecniche di lavorazione dei metalli. Offriamo soluzioni solide, funzionali e curate nei minimi dettagli estetici e strutturali.
+                        </p>
+                        <p class="text-brand-grey text-base leading-relaxed mb-8">
+                            Ogni progetto viene seguito con la massima cura, dal sopralluogo iniziale al disegno, fino alla produzione e all'installazione a regola d'arte direttamente presso la tua sede o abitazione.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-sm bg-brand-card border border-brand-border">
+                                <div class="w-10 h-10 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center shrink-0 text-brand-orange font-display font-bold">01</div>
+                                <div>
+                                    <h4 class="font-display font-bold text-lg text-white uppercase">Su Misura al 100%</h4>
+                                    <p class="text-xs text-brand-grey">Progetti modellati sulle reali esigenze di spazio e stile del cliente.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-sm bg-brand-card border border-brand-border">
+                                <div class="w-10 h-10 rounded-full bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center shrink-0 text-brand-orange font-display font-bold">02</div>
+                                <div>
+                                    <h4 class="font-display font-bold text-lg text-white uppercase">Materiali di Qualità</h4>
+                                    <p class="text-xs text-brand-grey">Utilizzo di metalli trattati per resistere agli agenti atmosferici e durare nel tempo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <span class="outline-word">
-                        CARPENTERIA
-                    </span>
+                    <!-- Image Grid Feature -->
+                    <div class="lg:col-span-6 reveal-element">
+                        <div class="grid grid-cols-2 gap-4 relative">
+                            <div class="space-y-4">
+                                <div class="h-64 rounded-sm overflow-hidden border border-brand-border bg-brand-card">
+                                    <img src="LPMETALLI_LAVORO-01.jpg" alt="Lavorazione Metallo 1" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="h-44 rounded-sm overflow-hidden border border-brand-border bg-brand-card">
+                                    <img src="LPMETALLI_LAVORO-03.jpg" alt="Lavorazione Metallo 3" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                            </div>
+                            <div class="space-y-4 pt-8">
+                                <div class="h-44 rounded-sm overflow-hidden border border-brand-border bg-brand-card">
+                                    <img src="LPMETALLI_LAVORO-02.jpg" alt="Lavorazione Metallo 2" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                                <div class="h-64 rounded-sm overflow-hidden border border-brand-border bg-brand-card">
+                                    <img src="LPMETALLI_LAVORO-05.jpg" alt="Lavorazione Metallo 5" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                    <span class="separator">
-                        ·
-                    </span>
-
-                    <span class="outline-word">
-                        SALDATURE
-                    </span>
-
-                    <span class="separator">
-                        ·
-                    </span>
-
-                    <span class="outline-word">
-                        LAVORI SPECIALI
-                    </span>
-
-                </h2>
-
+        <!-- SERVIZI & CAROSELLO INTERATTIVO SCORREVOLE -->
+        <section id="servizi" class="py-24 bg-brand-black/90 border-b border-brand-border relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 mb-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">Soluzioni Metallo</span>
+                        <h2 class="font-display font-bold text-4xl sm:text-6xl text-white uppercase tracking-tight mt-1">
+                            I Nostri <span class="text-brand-orange">Servizi</span>
+                        </h2>
+                    </div>
+                    
+                    <!-- Controlli del Carosello -->
+                    <div class="flex items-center gap-4">
+                        <span class="text-xs font-display text-brand-grey uppercase tracking-widest hidden sm:inline-block">Scorri o usa le frecce</span>
+                        <button id="carousel-prev" aria-label="Precedente" class="w-12 h-12 rounded-sm border border-brand-border bg-brand-card hover:bg-brand-orange hover:border-brand-orange text-white flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button id="carousel-next" aria-label="Successivo" class="w-12 h-12 rounded-sm border border-brand-border bg-brand-card hover:bg-brand-orange hover:border-brand-orange text-white flex items-center justify-center transition-all duration-300 focus:outline-none">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-        </figure>
-
-
-
-        <!-- =================================================
-             CAROSELLO FOTO 02 — 12
-        ================================================= -->
-
-        <div
-            class="lavorazioni-carousel"
-            aria-label="Lavorazioni LP Metalli"
-        >
-
-
-            <div class="lavorazioni-track">
-
-
-                <!-- FOTO 02 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-02.jpg"
-                        alt="Lavorazione metallica LP Metalli"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 03 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-03.jpg"
-                        alt="Lavorazione in metallo LP Metalli"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 04 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-04.jpg"
-                        alt="Carpenteria metallica LP Metalli"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 05 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-05.jpg"
-                        alt="Lavorazione di carpenteria metallica"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 06 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-06.jpg"
-                        alt="Lavorazione metallica in officina"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 07 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-07.jpg"
-                        alt="Dettaglio di lavorazione metallica"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 08 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-08.jpg"
-                        alt="Struttura metallica realizzata da LP Metalli"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 09 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-09.jpg"
-                        alt="Lavorazione di carpenteria metallica"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 10 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-10.jpg"
-                        alt="Lavorazione metallica LP Metalli"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 11 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-11.jpg"
-                        alt="Dettaglio di lavorazione in metallo"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 12 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-12.jpg"
-                        alt="Realizzazione in carpenteria metallica"
-                    >
-
-                </figure>
-
-
-
-                <!-- =================================================
-                     SECONDA COPIA — CAROSELLO INFINITO
-                ================================================= -->
-
-
-                <!-- FOTO 02 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-02.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 03 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-03.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 04 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-04.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 05 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-05.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 06 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-06.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 07 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-07.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 08 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-08.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 09 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-09.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 10 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-10.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 11 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-11.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
-                <!-- FOTO 12 -->
-
-                <figure class="carousel-photo">
-
-                    <img
-                        src="immagini/LPMETALLI_LAVORO-12.jpg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                </figure>
-
-
+            <!-- CAROUSEL SCORREVOLE TOUCH E MOUSE -->
+            <div class="relative w-full overflow-hidden py-4 bg-brand-dark/30 border-y border-white/5">
+                <div id="services-carousel" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar px-6 max-w-7xl mx-auto cursor-grab active:cursor-grabbing select-none">
+                    
+                    <!-- Servizio 1 -->
+                    <div class="w-80 sm:w-96 h-[420px] relative group rounded-sm overflow-hidden border border-brand-border bg-brand-card flex-shrink-0 transition-transform duration-300 hover:-translate-y-2">
+                        <img src="servizi_1.jpg" alt="Cancelli e Recinzioni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">01 / ESTERNI</span>
+                            <h3 class="font-display font-bold text-3xl text-white uppercase mt-1">Cancelli & Recinzioni</h3>
+                            <p class="text-sm text-brand-lightGrey mt-3 opacity-90 leading-relaxed">Cancelli ad anta e scorrevoli, recinzioni perimetrali di sicurezza in ferro tubolare o battuto.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servizio 2 -->
+                    <div class="w-80 sm:w-96 h-[420px] relative group rounded-sm overflow-hidden border border-brand-border bg-brand-card flex-shrink-0 transition-transform duration-300 hover:-translate-y-2">
+                        <img src="servizi_2.jpg" alt="Inferriate e Grate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">02 / SICUREZZA</span>
+                            <h3 class="font-display font-bold text-3xl text-white uppercase mt-1">Inferriate & Grate</h3>
+                            <p class="text-sm text-brand-lightGrey mt-3 opacity-90 leading-relaxed">Protezioni antieffrazione fisse o snodate per porte e finestre, curate nel design e nella robustezza.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servizio 3 -->
+                    <div class="w-80 sm:w-96 h-[420px] relative group rounded-sm overflow-hidden border border-brand-border bg-brand-card flex-shrink-0 transition-transform duration-300 hover:-translate-y-2">
+                        <img src="servizi_3.jpg" alt="Ringhiere e Parapetti" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">03 / ARCHITETTURA</span>
+                            <h3 class="font-display font-bold text-3xl text-white uppercase mt-1">Ringhiere & Parapetti</h3>
+                            <p class="text-sm text-brand-lightGrey mt-3 opacity-90 leading-relaxed">Ringhiere per scale interne/esterne, balconcini e parapetti con finiture eleganti e moderne.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servizio 4 -->
+                    <div class="w-80 sm:w-96 h-[420px] relative group rounded-sm overflow-hidden border border-brand-border bg-brand-card flex-shrink-0 transition-transform duration-300 hover:-translate-y-2">
+                        <img src="servizi_4.jpg" alt="Carpenteria Metallica Generica" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">04 / STRUTTURE</span>
+                            <h3 class="font-display font-bold text-3xl text-white uppercase mt-1">Carpenteria Generica</h3>
+                            <p class="text-sm text-brand-lightGrey mt-3 opacity-90 leading-relaxed">Strutture portanti leggere, soppalchi, tettoie, pensiline e lavorazioni speciali in ferro ed acciaio.</p>
+                        </div>
+                    </div>
+
+                    <!-- Servizio 5 -->
+                    <div class="w-80 sm:w-96 h-[420px] relative group rounded-sm overflow-hidden border border-brand-border bg-brand-card flex-shrink-0 transition-transform duration-300 hover:-translate-y-2">
+                        <img src="servizi_5.jpg" alt="Lavorazioni Speciali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">05 / SPECIALI</span>
+                            <h3 class="font-display font-bold text-3xl text-white uppercase mt-1">Saldatura & Posa</h3>
+                            <p class="text-sm text-brand-lightGrey mt-3 opacity-90 leading-relaxed">Interventi di saldatura ad alta precisione, riparazioni ed assemblaggio diretto in cantiere.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+<!-- GALLERIA REALIZZAZIONI -->
+        <section id="lavori" class="py-24 bg-brand-dark/90 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">Portafoglio</span>
+                    <h2 class="font-display font-bold text-4xl sm:text-6xl text-white uppercase tracking-tight mt-1">
+                        Le Nostre <span class="text-outline-orange">Realizzazioni</span>
+                    </h2>
+                    <p class="text-brand-grey text-sm sm:text-base mt-4">
+                        Una selezione dei principali lavori di carpenteria, lavorazione del ferro, interventi ad alta quota e riparazioni su misura.
+                    </p>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Foto 1: LPMETALLI_LAVORO-01 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-01.jpg" alt="Saldatura e Lavorazione Strutturale" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Carpenteria Pesante</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Saldatura & Lavorazione Strutturale</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Saldature ad alta precisione e assemblaggio di componenti metallici portanti.</p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 2: LPMETALLI_LAVORO-03 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-03.jpg" alt="Scala Inox con Taglio Laser" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Progettazione Completa</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Scale in Inox & Taglio Laser</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Realizzazione chiavi in mano: lavorazione acciaio inox, taglio laser di precisione e montaggio finale.</p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 3: LPMETALLI_LAVORO-02 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-02.jpg" alt="Scala in Ferro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Interni ed Esterni</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Scale in Ferro su Misura</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Strutture in ferro battuto e tubulare disegnate su misura per ogni esigenza abitativa.</p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 4: LPMETALLI_LAVORO-05 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-05.jpg" alt="Cancello Esterno" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Accessi & Recinzioni</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Cancelli Esterni</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Cancelli carrabili e pedonali resistenti agli agenti atmosferici e curati nel design.</p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 5: LPMETALLI_LAVORO-04 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-04.jpg" alt="Inferriate e Recinzioni" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Sicurezza Casa</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Inferriate & Recinzioni</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Grate di protezione antieffrazione e delimitazioni perimetrali in ferro.</p>
+                        </div>
+                    </div>
+
+                    <!-- Foto 6: LPMETALLI_LAVORO-10 -->
+                    <div class="group relative h-80 rounded-sm overflow-hidden border border-brand-border bg-brand-card reveal-element">
+                        <img src="LPMETALLI_LAVORO-10.jpg" alt="Opere Personalizzate" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="text-brand-orange font-display text-xs font-bold uppercase tracking-wider">Artigianato Speciale</span>
+                            <h3 class="font-display text-2xl font-bold text-white uppercase mt-1">Opere Personalizzate</h3>
+                            <p class="text-xs text-brand-lightGrey mt-1">Lavorazioni artistiche e strutture metalliche speciali su disegno del cliente.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOX SERVIZI SPECIALI: RIPARAZIONI, ALTA QUOTA & CTA -->
+                <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Banner Interventi Speciali -->
+                    <div class="lg:col-span-5 p-8 rounded-sm bg-brand-card border border-brand-border flex flex-col justify-center reveal-element">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="w-3 h-3 rounded-full bg-brand-orange"></span>
+                            <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase">Servizi di Assistenza</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl sm:text-3xl text-white uppercase mb-3">
+                            Riparazioni & Interventi ad Alta Quota
+                        </h3>
+                        <p class="text-brand-grey text-sm leading-relaxed">
+                            Oltre alle nuove realizzazioni, eseguiamo interventi di <strong>riparazione rapida su strutture esistenti</strong>, saldature in loco e montaggi complessi <strong>ad alta quota</strong> garantendo massima sicurezza e accuratezza.
+                        </p>
+                    </div>
+
+                    <!-- CTA Box "Contattaci" -->
+                    <div class="lg:col-span-7 rounded-sm border border-dashed border-brand-orange/40 bg-brand-orange/5 p-8 flex flex-col justify-center items-start relative overflow-hidden reveal-element group hover:border-brand-orange transition-colors">
+                        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-orange/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <span class="text-brand-orange font-display text-xs font-bold tracking-widest uppercase mb-2">Il Tuo Progetto Su Misura</span>
+                        <h3 class="font-display font-bold text-3xl sm:text-4xl text-white uppercase leading-tight mb-4">
+                            Hai un'idea o una struttura da realizzare?
+                        </h3>
+                        <p class="text-brand-grey text-sm mb-6 max-w-md">
+                            Contattaci per un sopralluogo ed un preventivo personalizzato senza alcun impegno.
+                        </p>
+                        <a href="#contatti" class="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-sm font-display text-xs font-bold tracking-widest uppercase transition-all duration-300">
+                            <span>Contattaci</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DOVE SIAMO & MAPPA INTERATTIVA -->
+        <section id="dove-siamo" class="py-24 bg-brand-black border-y border-brand-border relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-5 reveal-element">
+                        <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">La Nostra Sede</span>
+                        <h2 class="font-display font-bold text-4xl sm:text-5xl text-white uppercase tracking-tight mt-1 mb-6">
+                            Vieni a Trovarci in <span class="text-brand-orange">Officina</span>
+                        </h2>
+                        <p class="text-brand-grey text-base leading-relaxed mb-8">
+                            Siamo a Galliate in provincia di Novara. Riceviamo su appuntamento per visionare i progetti e definire i dettagli tecnici delle lavorazioni.
+                        </p>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-sm bg-brand-card border border-brand-border flex items-center justify-center shrink-0 text-brand-orange">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-lg text-white uppercase">Indirizzo</h4>
+                                    <p class="text-sm text-brand-grey">Via Monte Nero 16, 28066 Galliate (NO)</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-sm bg-brand-card border border-brand-border flex items-center justify-center shrink-0 text-brand-orange">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-display font-bold text-lg text-white uppercase">Orari Officina</h4>
+                                    <p class="text-sm text-brand-grey">Lunedì - Venerdì: 08:00 - 12:00 / 13:30 - 18:00</p>
+                                    <p class="text-sm text-brand-grey">Sabato: Su Appuntamento</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mappa Leaflet -->
+                    <div class="lg:col-span-7 reveal-element">
+                        <div class="h-[450px] w-full rounded-sm overflow-hidden border border-brand-border dark-map shadow-2xl relative z-10" id="map"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTATTI & FORM -->
+        <section id="contatti" class="py-24 bg-brand-dark relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="max-w-4xl mx-auto bg-brand-card border border-brand-border p-8 sm:p-12 rounded-sm relative overflow-hidden reveal-element">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="text-center mb-10">
+                        <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">Preventivi Senza Impegno</span>
+                        <h2 class="font-display font-bold text-4xl sm:text-5xl text-white uppercase tracking-tight mt-1">
+                            Parla del Tuo <span class="text-brand-orange">Progetto</span>
+                        </h2>
+                        <p class="text-brand-grey text-sm sm:text-base mt-2">
+                            Compila il modulo sottostante oppure contattaci direttamente ai recapiti indicati.
+                        </p>
+                    </div>
+
+                    <form action="#" method="POST" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-widest text-brand-lightGrey mb-2">Nome e Cognome *</label>
+                                <input type="text" required class="w-full bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-orange transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-widest text-brand-lightGrey mb-2">Email *</label>
+                                <input type="email" required class="w-full bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-orange transition-colors">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-widest text-brand-lightGrey mb-2">Telefono</label>
+                                <input type="tel" class="w-full bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-orange transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-display uppercase tracking-widest text-brand-lightGrey mb-2">Tipologia Servizio</label>
+                                <select class="w-full bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-orange transition-colors">
+                                    <option value="cancelli">Cancelli e Recinzioni</option>
+                                    <option value="inferriate">Inferriate e Grate</option>
+                                    <option value="ringhiere">Ringhiere e Parapetti</option>
+                                    <option value="carpenteria">Carpenteria Generica</option>
+                                    <option value="altro">Altro</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-display uppercase tracking-widest text-brand-lightGrey mb-2">Messaggio *</label>
+                            <textarea rows="4" required class="w-full bg-brand-black border border-brand-border rounded-sm px-4 py-3 text-white focus:outline-none focus:border-brand-orange transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-4 rounded-sm font-display text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-lg shadow-brand-orange/20">
+                            Invia Richiesta Preventivo
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+ <!-- FOOTER -->
+<footer class="bg-brand-black border-t border-white/10 pt-16 pb-12 relative z-10 font-body">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+            
+            <!-- Colonna 1: Logo e Descrizione Breve -->
+            <div class="md:col-span-5 space-y-4">
+                <a href="#top" class="inline-flex items-center gap-4 group">
+                    <img src="logo.png" alt="LP Metalli Logo" class="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                    <div class="flex flex-col">
+                        <span class="font-display font-extrabold text-2xl tracking-wider leading-none text-white">LP <span class="text-brand-orange">METALLI</span></span>
+                        <span class="text-[11px] text-brand-grey font-body uppercase tracking-widest leading-none mt-1">di Salvatore La Porta</span>
+                    </div>
+                </a>
+                <p class="text-sm text-brand-grey max-w-sm leading-relaxed">
+                    Carpenteria metallica di precisione e lavorazioni artigianali su misura a Galliate e in tutta la provincia di Novara.
+                </p>
+            </div>
+
+            <!-- Colonna 2: Contatti & Sede -->
+            <div class="md:col-span-4 space-y-3">
+                <h4 class="font-display font-bold text-lg text-white uppercase tracking-wider text-brand-orange">Contatti & Sede</h4>
+                <ul class="space-y-2.5 text-sm text-brand-grey">
+                    <li class="flex items-center gap-3">
+                        <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>Via Monte Nero 16, 28066 Galliate (NO)</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <a href="mailto:info@lpmetalli.it" class="hover:text-brand-orange transition-colors">info@lpmetalli.it</a>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <svg class="w-4 h-4 text-brand-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <span>P.IVA: 02581450031</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Colonna 3: Social Network -->
+            <div class="md:col-span-3 space-y-4">
+                <h4 class="font-display font-bold text-lg text-white uppercase tracking-wider text-brand-orange">Seguici sui Social</h4>
+                <p class="text-xs text-brand-grey">Guarda i video delle nostre lavorazioni e le ultime realizzazioni:</p>
+                <div class="flex items-center gap-4 pt-1">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/lp_metalli/" target="_blank" rel="noopener noreferrer" aria-label="Instagram LP Metalli" class="w-10 h-10 rounded-sm bg-brand-card border border-brand-border flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-all duration-300">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+
+                  <!-- TikTok (FIXED SVG) -->
+                <a href="https://www.tiktok.com/@saibbo90" target="_blank" rel="noopener noreferrer" aria-label="TikTok LP Metalli" class="w-10 h-10 rounded-sm bg-brand-card border border-brand-border flex items-center justify-center text-white hover:text-brand-orange hover:border-brand-orange transition-all duration-300">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xml:space="preserve">
+                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .56.04.83.1v-3.5a6.37 6.37 0 0 0-.83-.05A6.34 6.34 0 0 0 3.15 15.6 6.34 6.34 0 0 0 9.49 22a6.34 6.34 0 0 0 6.34-6.34V9.25a8.16 8.16 0 0 0 4.76 1.52V7.32a4.85 4.85 0 0 1-1-.63z"/>
+                    </svg>
+                </a>
+                </div>
             </div>
 
         </div>
 
-    </section>
-
-
-
-    <!-- =====================================================
-         DOVE SIAMO
-    ===================================================== -->
-
-    <section
-        class="location-section"
-        id="dove-siamo"
-    >
-
-        <div class="location-copy">
-
-            <p class="eyebrow">
-                DOVE SIAMO
-            </p>
-
-
-            <h2>
-                CI TROVI
-                <span>QUI.</span>
-            </h2>
-
-
-            <div class="location-data">
-
-                <strong>
-                    LP METALLI
-                </strong>
-
-                <span>
-                    Indirizzo dell'officina
-                </span>
-
-                <span>
-                    Provincia / Città
-                </span>
-
-            </div>
-
+        <!-- Copyright & Credits -->
+        <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-grey">
+            <p>© 2026 LP Metalli di Salvatore La Porta. Tutti i diritti riservati.</p>
+            <p class="uppercase tracking-widest text-[10px]">Galliate (NO) • Carpenteria Metallica & Lavorazioni Ferro</p>
         </div>
-
-
-        <div class="map-placeholder">
-
-            <div class="map-cross"></div>
-
-            <span>
-                MAPPA
-            </span>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         CONTATTI
-    ===================================================== -->
-
-    <section
-        class="contact-section"
-        id="contatti"
-    >
-
-        <div class="contact-heading">
-
-            <p class="eyebrow">
-                CONTATTI
-            </p>
-
-
-            <h2>
-                PER UN
-                <span>PREVENTIVO.</span>
-            </h2>
-
-        </div>
-
-
-        <form class="contact-form">
-
-
-            <div class="form-row">
-
-                <label>
-                    NOME
-
-                    <input
-                        type="text"
-                        name="nome"
-                        required
-                    >
-                </label>
-
-
-                <label>
-                    AZIENDA
-
-                    <input
-                        type="text"
-                        name="azienda"
-                    >
-                </label>
-
-            </div>
-
-
-
-            <div class="form-row">
-
-                <label>
-                    EMAIL
-
-                    <input
-                        type="email"
-                        name="email"
-                        required
-                    >
-                </label>
-
-
-                <label>
-                    TELEFONO
-
-                    <input
-                        type="tel"
-                        name="telefono"
-                    >
-                </label>
-
-            </div>
-
-
-
-            <label>
-                MESSAGGIO
-
-                <textarea
-                    name="messaggio"
-                    rows="5"
-                    required
-                ></textarea>
-
-            </label>
-
-
-
-            <button
-                type="submit"
-                class="form-button"
-            >
-                INVIA RICHIESTA
-                <span>↗</span>
-            </button>
-
-        </form>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         LAVORA CON NOI
-    ===================================================== -->
-
-    <section
-        class="work-with-us"
-        id="lavora-con-noi"
-    >
-
-
-        <div class="work-with-copy">
-
-            <p class="eyebrow">
-                LAVORA CON NOI
-            </p>
-
-
-            <h2>
-                CERCHIAMO
-                <span>PERSONE.</span>
-            </h2>
-
-        </div>
-
-
-
-        <form class="work-form">
-
-
-            <label>
-                NOME E COGNOME
-
-                <input
-                    type="text"
-                    name="candidato"
-                    required
-                >
-            </label>
-
-
-
-            <label>
-                EMAIL
-
-                <input
-                    type="email"
-                    name="email"
-                    required
-                >
-            </label>
-
-
-
-            <label>
-                TELEFONO
-
-                <input
-                    type="tel"
-                    name="telefono"
-                >
-            </label>
-
-
-
-            <label>
-                CURRICULUM
-
-                <input
-                    type="file"
-                    name="cv"
-                    accept=".pdf,.doc,.docx"
-                >
-            </label>
-
-
-
-            <label>
-                MESSAGGIO
-
-                <textarea
-                    name="messaggio"
-                    rows="4"
-                ></textarea>
-            </label>
-
-
-
-            <button
-                type="submit"
-                class="form-button dark-button"
-            >
-                INVIA CANDIDATURA
-                <span>↗</span>
-            </button>
-
-        </form>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer class="site-footer">
-
-
-    <div class="footer-logo">
-        LP<span>METALLI</span>
     </div>
-
-
-    <div class="footer-info">
-
-        <span>
-            CARPENTERIA METALLICA
-        </span>
-
-        <span>
-            © 2026 LP Metalli
-        </span>
-
-
-        <div class="footer-social">
-
-
-            <!-- INSTAGRAM -->
-
-            <a
-                href="https://www.instagram.com/lp_metalli/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LP Metalli su Instagram"
-            >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="5"
-                    ></rect>
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="4"
-                    ></circle>
-
-                    <circle
-                        cx="17.5"
-                        cy="6.5"
-                        r="1"
-                        fill="currentColor"
-                        stroke="none"
-                    ></circle>
-
-                </svg>
-
-            </a>
-
-
-            <!-- TIKTOK -->
-
-            <a
-                href="https://www.tiktok.com/@weldingtrash"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LP Metalli su TikTok"
-            >
-
-                <svg
-                    class="tiktok-icon"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <path
-                        d="M15.5 3c.4 2.4 1.8 3.9 4.5 4.1v3.1c-1.8-.1-3.3-.6-4.5-1.6v6.2c0 4-2.5 6.2-6 6.2-3.1 0-5.5-2.1-5.5-5.2 0-3.5 2.9-5.8 6.7-5.3v3.2c-1.9-.3-3.4.5-3.4 2 0 1.1.8 2 2.1 2 1.4 0 2.6-.9 2.6-3V3h3.5z"
-                    ></path>
-
-                </svg>
-
-            </a>
-
-
-        </div>
-
-    </div>
-
 </footer>
 
+    <!-- JAVASCRIPT PER INTERATTIVITÀ, MAPPA E SCROLL REVEAL -->
+    <script>
+        // Init Mappa Leaflet
+        document.addEventListener('DOMContentLoaded', () => {
+            // Coordinate Galliate (NO) Via Monte Nero
+            const lat = 45.4785;
+            const lng = 8.6961;
 
-<script src="js/script.js"></script>
+            const map = L.map('map', {
+                scrollWheelZoom: false
+            }).setView([lat, lng], 15);
 
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            const customIcon = L.divIcon({
+                className: 'custom-map-pin',
+                html: `<div style="background-color: #ed5928; width: 20px; height: 20px; border-radius: 50%; border: 3px solid #ffffff; box-shadow: 0 0 10px rgba(237, 89, 40, 0.8);"></div>`,
+                iconSize: [20, 20],
+                iconAnchor: [10, 10]
+            });
+
+            L.marker([lat, lng], { icon: customIcon }).addTo(map)
+                .bindPopup('<b>LP Metalli</b><br>Via Monte Nero 16, Galliate (NO)')
+                .openPopup();
+        });
+
+        // Toggle Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        const bar1 = document.getElementById('bar1');
+        const bar2 = document.getElementById('bar2');
+        const bar3 = document.getElementById('bar3');
+
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileDrawer.classList.remove('hidden');
+                mobileDrawer.classList.add('flex');
+                bar1.classList.add('rotate-45', 'translate-y-2');
+                bar2.classList.add('opacity-0');
+                bar3.classList.add('-rotate-45', '-translate-y-2');
+            } else {
+                mobileDrawer.classList.add('hidden');
+                mobileDrawer.classList.remove('flex');
+                bar1.classList.remove('rotate-45', 'translate-y-2');
+                bar2.classList.remove('opacity-0');
+                bar3.classList.remove('-rotate-45', '-translate-y-2');
+            }
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileDrawer.classList.remove('flex');
+                isMenuOpen = false;
+                bar1.classList.remove('rotate-45', 'translate-y-2');
+                bar2.classList.remove('opacity-0');
+                bar3.classList.remove('-rotate-45', '-translate-y-2');
+            });
+        });
+
+        // Controlli Carosello Servizi
+        const carousel = document.getElementById('services-carousel');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+
+        prevBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: -380, behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            carousel.scrollBy({ left: 380, behavior: 'smooth' });
+        });
+
+        // Scroll Animations (IntersectionObserver)
+        const revealElements = document.querySelectorAll('.reveal-element');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Riempimento parziale di WORKS in base allo Scroll
+        const heroWorks = document.getElementById('hero-works');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY > 50) {
+                heroWorks.style.color = '#f3f2ee';
+            } else {
+                heroWorks.style.color = 'transparent';
+            }
+        });
+    </script>
 </body>
 
 </html>

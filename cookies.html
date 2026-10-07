@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | LP Metalli di Salvatore La Porta</title>
+    <meta name="robots" content="noindex, follow">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ed5928',
+                            orangeHover: '#d4491c',
+                            black: '#0d0e0f',
+                            dark: '#141517',
+                            card: '#1c1d20',
+                            border: '#2a2c30',
+                            grey: '#8f8f8c',
+                            lightGrey: '#c9c9c5',
+                            white: '#f3f2ee',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['"Barlow Condensed"', 'sans-serif'],
+                        body: ['"DM Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Style CSS Esterno -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-brand-black text-brand-white font-body selection:bg-brand-orange selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="glass-header fixed top-0 left-0 right-0 z-50 border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="LP Metalli Logo" class="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-2xl tracking-wider leading-none text-white">LP <span class="text-brand-orange">METALLI</span></span>
+                    <span class="text-[10px] text-brand-grey font-body uppercase tracking-widest leading-none mt-0.5">di Salvatore La Porta</span>
+                </div>
+            </a>
+
+            <a href="index.html" class="inline-flex items-center gap-2 border border-white/20 hover:border-brand-orange text-white hover:text-brand-orange px-4 py-2 rounded-sm font-display text-xs font-bold tracking-widest uppercase transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span>Torna alla Home</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTENT -->
+    <main class="pt-32 pb-20 max-w-4xl mx-auto px-6 w-full flex-grow">
+        <div class="mb-8 border-b border-white/10 pb-6">
+            <span class="font-display text-xs font-bold text-brand-orange tracking-widest uppercase">Legale</span>
+            <h1 class="font-display font-extrabold text-4xl sm:text-6xl text-white uppercase tracking-tight mt-1">Informativa sui Cookie</h1>
+            <p class="text-xs text-brand-grey uppercase tracking-wider mt-2">Ultimo aggiornamento: Ottobre 2026</p>
+        </div>
+
+        <div class="space-y-8 text-sm text-brand-lightGrey leading-relaxed">
+
+            <section class="space-y-3">
+                <h2 class="font-display font-bold text-2xl text-white uppercase tracking-wider">1. Cosa sono i Cookie?</h2>
+                <p>
+                    I cookie sono piccoli file di testo salvati sul dispositivo dell'utente durante la navigazione su un sito web, necessari a memorizzare preferenze di navigazione e garantire la corretta erogazione dei servizi tecnici.
+                </p>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="font-display font-bold text-2xl text-white uppercase tracking-wider">2. Tipologie di Cookie Utilizzate</h2>
+
+                <div class="bg-brand-card border border-brand-border p-5 rounded-sm space-y-2">
+                    <h3 class="font-display font-bold text-lg text-brand-orange uppercase">a) Cookie Tecnici (Strettamente Necessari)</h3>
+                    <p class="text-xs text-brand-grey">
+                        Garantiscono il corretto funzionamento delle funzionalità base del sito (es. salvataggio della preferenza di consenso del banner cookie tramite <code class="text-white bg-black/40 px-1 py-0.5 rounded">localStorage</code>). Non richiedono il preventivo consenso dell'utente.
+                    </p>
+                </div>
+
+                <div class="bg-brand-card border border-brand-border p-5 rounded-sm space-y-2">
+                    <h3 class="font-display font-bold text-lg text-brand-orange uppercase">b) Cookie e Servizi di Terze Parti (Mappa Interattiva)</h3>
+                    <p class="text-xs text-brand-grey">
+                        Il sito utilizza la libreria cartografica <strong class="text-white">Leaflet / OpenStreetMap</strong> nella sezione "Dove Siamo" per visualizzare la posizione geografica della sede. Tale servizio può erogare mappe interattive e raccogliere dati tecnici anonimi di connessione.
+                    </p>
+                </div>
+            </section>
+
+            <section class="space-y-3">
+                <h2 class="font-display font-bold text-2xl text-white uppercase tracking-wider">3. Gestione e Disattivazione tramite Browser</h2>
+                <p>L'utente può disabilitare o cancellare i cookie in qualsiasi momento modificando le impostazioni del proprio browser web:</p>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <li>
+                        <a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener" class="flex items-center justify-between p-3 bg-brand-card border border-brand-border hover:border-brand-orange transition-colors rounded-sm text-xs text-white">
+                            <span>Google Chrome</span>
+                            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://support.mozilla.org/it/kb/Gestione%20dei%20cookie" target="_blank" rel="noopener" class="flex items-center justify-between p-3 bg-brand-card border border-brand-border hover:border-brand-orange transition-colors rounded-sm text-xs text-white">
+                            <span>Mozilla Firefox</span>
+                            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://support.apple.com/it-it/guide/safari/sfri11471/mac" target="_blank" rel="noopener" class="flex items-center justify-between p-3 bg-brand-card border border-brand-border hover:border-brand-orange transition-colors rounded-sm text-xs text-white">
+                            <span>Apple Safari</span>
+                            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://support.microsoft.com/it-it/microsoft-edge" target="_blank" rel="noopener" class="flex items-center justify-between p-3 bg-brand-card border border-brand-border hover:border-brand-orange transition-colors rounded-sm text-xs text-white">
+                            <span>Microsoft Edge</span>
+                            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-brand-card border border-brand-border p-6 rounded-sm space-y-3">
+                <h2 class="font-display font-bold text-xl text-white uppercase tracking-wider text-brand-orange">4. Titolare del Trattamento</h2>
+                <p>
+                    <strong class="text-white">LP METALLI di Salvatore La Porta</strong><br>
+                    Via San Giuseppe Maria Gambaro, 17 - 28066 Galliate (NO)<br>
+                    P.IVA: IT02803550033<br>
+                    Email: <a href="mailto:salvatorelaporta.90@libero.it" class="text-brand-orange underline hover:text-white transition-colors">salvatorelaporta.90@libero.it</a>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black border-t border-brand-border py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-xs text-brand-grey/60">
+            &copy; 2026 LP Metalli di Salvatore La Porta - Via S. G. M. Gambaro, 17 - Galliate (NO) - P.IVA IT02803550033. Tutti i diritti riservati.
+        </div>
+    </footer>
+
+</body>
+
+</html>
